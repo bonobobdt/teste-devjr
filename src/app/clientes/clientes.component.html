@@ -1,0 +1,86 @@
+
+
+<form *ngIf=!token>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Usuário</span>
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Senha</span>
+        <input type="text"  class="form-control" aria-label="Password" aria-describedby="basic-addon1">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-outline-success" (click)="login()">Entrar</button>
+    </div>
+</form>
+
+
+<div *ngIf=token>
+    <div *ngIf="targetedClient">
+        <div class="row">
+            <div class="col-sm-10">
+                <app-title [title]="'Cliente: ' + targetedClient.name"></app-title>
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-outline-warning" (click)="goBack()">Voltar</button>
+            </div>
+        </div>
+    
+        <form>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nome</span>
+                <input type="text" value="{{ targetedClient.name }}" class="form-control" placeholder="Nome Completo" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">CPF</span>
+                <input type="text" value="{{ targetedClient.cpf }}" class="form-control" placeholder="CPF (Apenas Números)" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Nascimento</span>
+                <input type="text" value="{{ targetedClient.birth }}" class="form-control" placeholder="Data de Nascimento (DDMMAAAA)" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Telefone</span>
+                <input type="text" value="{{ targetedClient.phone }}" class="form-control" placeholder="(XX)XXXXXXXX" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-outline-success">Salvar</button>
+                <button class="btn btn-outline-danger">Excluir</button>
+            </div>
+        </form>
+    </div>
+    
+    <div *ngIf="!targetedClient"> 
+        <app-title [title]="title"></app-title>
+    
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Nascimento</th>
+                <th scope="col">Telefone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cliente of clientes" 
+                style="cursor: pointer;"
+                (click)="targetClient(cliente)"
+              >
+                <th scope="row">{{cliente.id}}</th>
+                <td>{{ cliente.name}}</td>
+                <td>{{ cliente.cpf }}</td>
+                <td>{{ cliente.birth }}</td>
+                <td>{{ cliente.phone }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+
+<div class="row">
+
+    
+</div>
